@@ -1,3 +1,7 @@
+
+import entidades.Producto;
+import java.util.TreeSet;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
@@ -8,12 +12,14 @@
  * @author Ryzen 5 5600G
  */
 public class ListadoPorPrecio extends javax.swing.JInternalFrame {
+       private TreeSet<Producto> listaProductos;
 
     /**
      * Creates new form ListadoPorPrecio
      */
-    public ListadoPorPrecio() {
+    public ListadoPorPrecio(TreeSet<Producto> listaProductos) {
         initComponents();
+        this.listaProductos=listaProductos;
     }
 
     /**

@@ -96,6 +96,10 @@ public class tp6almacen extends javax.swing.JFrame {
         Jescritorio.removeAll();
         Jescritorio.repaint();
         Productos p= new Productos(listaProductos);
+        p.setVisible(true);
+        Jescritorio.add(p);
+        Jescritorio.moveToFront(p);
+        
     }//GEN-LAST:event_JproductoActionPerformed
 
     /**
