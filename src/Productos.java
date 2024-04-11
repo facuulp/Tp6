@@ -62,7 +62,7 @@ public class Productos extends javax.swing.JInternalFrame {
 
         jButton4.setText("Salir");
 
-        jButton5.setText("Buscar");
+        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Facuando\\Desktop\\LUPAA.png")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,7 +139,7 @@ public class Productos extends javax.swing.JInternalFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         pack();
