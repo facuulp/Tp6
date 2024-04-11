@@ -4,7 +4,7 @@ import java.util.TreeSet;
 
 
 public class tp6almacen extends javax.swing.JFrame {
-    private TreeSet<Producto> lista = new TreeSet<>();
+    private TreeSet<Producto> listaProductos = new TreeSet<>();
 
    
     public tp6almacen() {
@@ -95,7 +95,7 @@ public class tp6almacen extends javax.swing.JFrame {
     private void JproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JproductoActionPerformed
         Jescritorio.removeAll();
         Jescritorio.repaint();
-        Productos p= new Productos()
+        Productos p= new Productos(listaProductos);
     }//GEN-LAST:event_JproductoActionPerformed
 
     /**
