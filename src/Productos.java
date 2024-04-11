@@ -1,4 +1,5 @@
 
+import entidades.Categoria;
 import entidades.Producto;
 import java.util.TreeSet;
 
@@ -19,9 +20,12 @@ public class Productos extends javax.swing.JInternalFrame {
     public Productos(TreeSet<Producto> listaProductos) {
         initComponents();
         this.listaProductos = listaProductos;
+        llenarcombox();
     }
-private void llenarcombox() {
-    
+    private void llenarcombox() {
+        jcCategoria.addItem(new Categoria(1, "Limpieza"));
+        jcCategoria.addItem(new Categoria(2, "Comestible"));
+        jcCategoria.addItem(new Categoria(3, "Perfumeria"));
 }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,7 +46,7 @@ private void llenarcombox() {
         Jdescripcion = new javax.swing.JTextField();
         Jprecio = new javax.swing.JTextField();
         Jstock = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcCategoria = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -61,6 +65,12 @@ private void llenarcombox() {
 
         jLabel6.setText("Stock:");
 
+        jcCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcCategoriaActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("Nuevo");
 
         jButton2.setText("Guardar");
@@ -68,8 +78,6 @@ private void llenarcombox() {
         jButton3.setText("Eliminar");
 
         jButton4.setText("Salir");
-
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Facuando\\Desktop\\LUPAA.png")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,7 +109,7 @@ private void llenarcombox() {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Jstock, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, 245, Short.MAX_VALUE)
+                                        .addComponent(jcCategoria, javax.swing.GroupLayout.Alignment.LEADING, 0, 245, Short.MAX_VALUE)
                                         .addComponent(Jprecio, javax.swing.GroupLayout.Alignment.LEADING)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
@@ -141,7 +149,7 @@ private void llenarcombox() {
                             .addComponent(Jprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(37, 37, 37)
                         .addComponent(jLabel5))
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -158,6 +166,10 @@ private void llenarcombox() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jcCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcCategoriaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Jcodigo;
@@ -169,12 +181,12 @@ private void llenarcombox() {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JComboBox<Categoria> jcCategoria;
     // End of variables declaration//GEN-END:variables
 }
