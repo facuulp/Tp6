@@ -7,12 +7,12 @@
  *
  * @author Facundo
  */
-public class porrubro extends javax.swing.JInternalFrame {
+public class ListadoPorRubro extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form porrubro
      */
-    public porrubro() {
+    public ListadoPorRubro() {
         initComponents();
     }
 
