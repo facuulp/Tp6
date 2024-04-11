@@ -1,6 +1,10 @@
 
+import entidades.Producto;
+import java.util.TreeSet;
+
+
 public class tp6almacen extends javax.swing.JFrame {
-    private TreeSet<>
+    private TreeSet<Producto> lista = new TreeSet<>();
 
    
     public tp6almacen() {
