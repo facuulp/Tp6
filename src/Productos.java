@@ -47,10 +47,10 @@ public class Productos extends javax.swing.JInternalFrame {
         Jprecio = new javax.swing.JTextField();
         Jstock = new javax.swing.JTextField();
         jcCategoria = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jbNuevo = new javax.swing.JButton();
+        jbGuardar = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -66,19 +66,42 @@ public class Productos extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Stock:");
 
+        Jcodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JcodigoKeyTyped(evt);
+            }
+        });
+
+        Jprecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JprecioKeyTyped(evt);
+            }
+        });
+
+        Jstock.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JstockKeyTyped(evt);
+            }
+        });
+
         jcCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcCategoriaActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Nuevo");
+        jbNuevo.setText("Nuevo");
 
-        jButton2.setText("Guardar");
+        jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Eliminar");
+        jbEliminar.setText("Eliminar");
 
-        jButton4.setText("Salir");
+        jbSalir.setText("Salir");
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoBuscar.png"))); // NOI18N
 
@@ -108,13 +131,13 @@ public class Productos extends javax.swing.JInternalFrame {
                             .addComponent(Jstock, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jButton1)
+                        .addComponent(jbNuevo)
                         .addGap(31, 31, 31)
-                        .addComponent(jButton2)
+                        .addComponent(jbGuardar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(jbEliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)
+                        .addComponent(jbSalir)
                         .addGap(16, 16, 16)))
                 .addGap(42, 42, 42))
             .addGroup(layout.createSequentialGroup()
@@ -150,10 +173,10 @@ public class Productos extends javax.swing.JInternalFrame {
                     .addComponent(Jstock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jbNuevo)
+                    .addComponent(jbGuardar)
+                    .addComponent(jbEliminar)
+                    .addComponent(jbSalir))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -164,16 +187,43 @@ public class Productos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcCategoriaActionPerformed
 
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        int codigo = Integer.parseInt(Jcodigo.getText());
+        String descripcion = Jdescripcion.getText();
+        double precio = Double.parseDouble(Jprecio.getText());
+        Categoria categ = (Categoria) jcCategoria.getSelectedItem();
+        int stock = Integer.parseInt(Jstock.getText()); 
+        
+        
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void JcodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JcodigoKeyTyped
+        char digito = evt.getKeyChar();
+        if (!Character.isDigit(digito)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_JcodigoKeyTyped
+
+    private void JprecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JprecioKeyTyped
+        char digito = evt.getKeyChar();
+        if (!Character.isDigit(digito)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_JprecioKeyTyped
+
+    private void JstockKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JstockKeyTyped
+        char digito = evt.getKeyChar();
+        if (!Character.isDigit(digito)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_JstockKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Jcodigo;
     private javax.swing.JTextField Jdescripcion;
     private javax.swing.JTextField Jprecio;
     private javax.swing.JTextField Jstock;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -181,6 +231,10 @@ public class Productos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbNuevo;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Categoria> jcCategoria;
     // End of variables declaration//GEN-END:variables
 }
