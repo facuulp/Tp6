@@ -3,15 +3,7 @@ import entidades.Producto;
 import java.util.TreeSet;
 import javax.swing.table.DefaultTableModel;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 
-/**
- *
- * @author Ryzen 5 5600G
- */
 public class ListadoPorNombre extends javax.swing.JInternalFrame {
        private TreeSet<Producto> listaProductos;
        private DefaultTableModel modelo = new DefaultTableModel();

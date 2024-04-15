@@ -112,7 +112,8 @@ public class ListadoPorPrecio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtPrecio2ActionPerformed
 
     private void jtPrecio1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPrecio1KeyReleased
-        // TODO add your handling code here:
+       limpiarFilas();
+       
     }//GEN-LAST:event_jtPrecio1KeyReleased
      private void agregarCabecera() {
         modelo.addColumn("Código");
