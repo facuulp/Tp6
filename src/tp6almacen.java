@@ -4,8 +4,8 @@ import java.util.TreeSet;
 
 
 public class tp6almacen extends javax.swing.JFrame {
-    private TreeSet<Producto> listaProductos = new TreeSet<>();
-
+    private  TreeSet<Producto> listaProductos = new TreeSet<>();
+    
    
     public tp6almacen() {
         initComponents();
@@ -25,7 +25,7 @@ public class tp6almacen extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         Jproducto = new javax.swing.JMenuItem();
         Jrubro = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jmRubro = new javax.swing.JMenuItem();
         Jprecio = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -55,9 +55,19 @@ public class tp6almacen extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         Jrubro.setText("Consultas");
+        Jrubro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JrubroActionPerformed(evt);
+            }
+        });
 
-        jMenuItem2.setText("Por rubro");
-        Jrubro.add(jMenuItem2);
+        jmRubro.setText("Por rubro");
+        jmRubro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmRubroActionPerformed(evt);
+            }
+        });
+        Jrubro.add(jmRubro);
 
         Jprecio.setText("Por nombre");
         Jprecio.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +112,19 @@ public class tp6almacen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_JproductoActionPerformed
 
+    private void JrubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JrubroActionPerformed
+        
+    }//GEN-LAST:event_JrubroActionPerformed
+
+    private void jmRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRubroActionPerformed
+        Jescritorio.removeAll();
+        Jescritorio.repaint();
+        ListadoPorRubro lpr= new ListadoPorRubro(listaProductos);
+        lpr.setVisible(true);
+        Jescritorio.add(lpr);
+        Jescritorio.moveToFront(lpr);
+    }//GEN-LAST:event_jmRubroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -144,7 +167,7 @@ public class tp6almacen extends javax.swing.JFrame {
     private javax.swing.JMenu Jrubro;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jmRubro;
     // End of variables declaration//GEN-END:variables
 }

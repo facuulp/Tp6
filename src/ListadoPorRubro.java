@@ -1,6 +1,8 @@
 
+import entidades.Categoria;
 import entidades.Producto;
 import java.util.TreeSet;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -13,14 +15,28 @@ import java.util.TreeSet;
  */
 public class ListadoPorRubro extends javax.swing.JInternalFrame {
    private TreeSet<Producto> listaProductos;
+   private DefaultTableModel modelo = new DefaultTableModel();
     /**
      * Creates new form porrubro
      */
     public ListadoPorRubro(TreeSet<Producto> listaProductos) {
         initComponents();
         this.listaProductos=listaProductos;
+        llenarcombox();
+        agregarCabecera();
     }
-
+     private void llenarcombox() {
+        JCategoria.addItem(new Categoria(1, "Limpieza"));
+        JCategoria.addItem(new Categoria(2, "Comestible"));
+        JCategoria.addItem(new Categoria(3, "Perfumeria"));
+    }
+      private void limpiarFilas(){
+          while (modelo.getRowCount()> 0) {              
+              modelo.removeRow(0);
+          }
+          
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,7 +50,7 @@ public class ListadoPorRubro extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         JtablaRubro = new javax.swing.JTable();
-        JboxRubro = new javax.swing.JComboBox<>();
+        JCategoria = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Listado de Productos por Rubro:");
@@ -54,45 +70,88 @@ public class ListadoPorRubro extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(JtablaRubro);
 
+        JCategoria.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                JCategoriaItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(159, 159, 159)
+                .addGap(234, 234, 234)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(JboxRubro, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(103, 103, 103))
+                .addGap(195, 195, 195))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(JboxRubro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void JCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCategoriaItemStateChanged
+        limpiarFilas();
+        Categoria categoriaS = (Categoria)JCategoria.getSelectedItem();
+        switch(categoriaS.getNombre()){
+            case "Limpieza":
+                for (Producto producto  : listaProductos) {
+                    if (producto.getCategorias().getNombre().equals("Limpieza")) {
+                        modelo.addRow(new Object[]{producto.getCodigo(),producto.getDescripcion(), producto.getPrecio(), producto.getStock()});
+                    }
+                }
+                break;
+            case "Comestible":
+                for (Producto producto  : listaProductos) {
+                    if (producto.getCategorias().getNombre().equals("Comestible")) {
+                        modelo.addRow(new Object[]{producto.getCodigo(),producto.getDescripcion(), producto.getPrecio(), producto.getStock()});
+                    }
+                }
+                break;
+            case "Perfumeria":
+                for (Producto producto  : listaProductos) {
+                    if (producto.getCategorias().getNombre().equals("Perfumeria")) {
+                        modelo.addRow(new Object[]{producto.getCodigo(),producto.getDescripcion(), producto.getPrecio(), producto.getStock()});
+                    }
+                }
+                break;
+        }
+    }//GEN-LAST:event_JCategoriaItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> JboxRubro;
+    private javax.swing.JComboBox<Categoria> JCategoria;
     private javax.swing.JTable JtablaRubro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    private void agregarCabecera() {
+        modelo.addColumn("Código");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Rubro");
+        modelo.addColumn("Stock");
+        JtablaRubro.setModel(modelo);
+    }
 }
