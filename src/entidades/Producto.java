@@ -19,6 +19,8 @@ public class Producto implements Comparable<Producto>{
         this.categorias = categorias;
     }
 
+    
+
     public Double getPrecio() {
         return precio;
     }

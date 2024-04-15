@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 public class Productos extends javax.swing.JInternalFrame {
     private TreeSet<Producto> listaProductos;
-    private Producto auxiliar;
+    private Producto auxiliar=null;
     
     public Productos(TreeSet<Producto> listaProductos) {
         initComponents();
@@ -39,7 +39,7 @@ public class Productos extends javax.swing.JInternalFrame {
         jbGuardar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        Jbuscar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Gestion de productos:");
@@ -106,7 +106,12 @@ public class Productos extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen 5 5600G\\Documents\\NetBeansProjects\\tp6\\src\\imagenes\\iconoBuscar.png")); // NOI18N
+        Jbuscar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen 5 5600G\\Documents\\NetBeansProjects\\tp6\\src\\imagenes\\iconoBuscar.png")); // NOI18N
+        Jbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JbuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,7 +132,7 @@ public class Productos extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Jcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Jbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(Jdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Jprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(JCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,7 +162,7 @@ public class Productos extends javax.swing.JInternalFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Jcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2))
-                    .addComponent(jButton5))
+                    .addComponent(Jbuscar))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -191,14 +196,28 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_JCategoriaActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        try{
         int codigo = Integer.parseInt(Jcodigo.getText());
         String descripcion = Jdescripcion.getText();
         double precio = Double.parseDouble(Jprecio.getText());
         Categoria categ = (Categoria) JCategoria.getSelectedItem();
-        int stock = Integer.parseInt(Jstock.getText()); 
-        JOptionPane.showMessageDialog(this, "Un producto se guardo");
-        limpiar();
+        int stock = Integer.parseInt(Jstock.getText());
+        Producto prodAgregado= new Producto(codigo,descripcion,precio,stock,categ);
+         if(listaProductos.add(prodAgregado)){
+           JOptionPane.showMessageDialog(this, "Producto Agregado");
+           limpiar();
+       }else {
+       
+           JOptionPane.showMessageDialog(this, "Ya existe un producto con ese código");
+       }
         
+        limpiar();
+        }catch(Exception r){
+            JOptionPane.showMessageDialog(this,"Faltan datos");
+            limpiar();
+            return;
+        
+        }
         
         
         
@@ -240,8 +259,29 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        
+        dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void JbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbuscarActionPerformed
+        int codigo = Integer.parseInt(Jcodigo.getText());
+        for (Producto listaProducto : listaProductos) {
+            if(codigo==listaProducto.getCodigo()){
+                Jdescripcion.setText(listaProducto.getDescripcion());
+                Jprecio.setText(listaProducto.getPrecio()+"");
+                Jstock.setText(listaProducto.getStock()+"");
+                JCategoria.setSelectedItem(listaProducto.getCategorias());
+                jbEliminar.setEnabled(true);
+                
+                 
+            
+            }
+            
+        }
+        
+            
+        
+        
+    }//GEN-LAST:event_JbuscarActionPerformed
     private void limpiar(){
         Jcodigo.setText("");
         Jdescripcion.setText("");
@@ -257,11 +297,11 @@ public class Productos extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Categoria> JCategoria;
+    private javax.swing.JButton Jbuscar;
     private javax.swing.JTextField Jcodigo;
     private javax.swing.JTextField Jdescripcion;
     private javax.swing.JTextField Jprecio;
     private javax.swing.JTextField Jstock;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -273,4 +313,8 @@ public class Productos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
     // End of variables declaration//GEN-END:variables
+
+    private boolean validaEntero(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

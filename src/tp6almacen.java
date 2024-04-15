@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 public class tp6almacen extends javax.swing.JFrame {
     private TreeSet<Producto> listaProductos = new TreeSet<>();
-
+    
    
     public tp6almacen() {
         initComponents();
