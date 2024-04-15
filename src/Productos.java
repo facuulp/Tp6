@@ -197,6 +197,7 @@ public class Productos extends javax.swing.JInternalFrame {
         Categoria categ = (Categoria) JCategoria.getSelectedItem();
         int stock = Integer.parseInt(Jstock.getText()); 
         JOptionPane.showMessageDialog(this, "Un producto se guardo");
+        listaProductos.add(new Producto(codigo, descripcion, precio, stock, categ));
         limpiar();
         
         

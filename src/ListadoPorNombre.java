@@ -1,6 +1,7 @@
 
 import entidades.Producto;
 import java.util.TreeSet;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -13,6 +14,7 @@ import java.util.TreeSet;
  */
 public class ListadoPorNombre extends javax.swing.JInternalFrame {
        private TreeSet<Producto> listaProductos;
+       private DefaultTableModel modelo = new DefaultTableModel();
 
     /**
      * Creates new form ListadoPorNombre
@@ -20,6 +22,7 @@ public class ListadoPorNombre extends javax.swing.JInternalFrame {
     public ListadoPorNombre(TreeSet<Producto> listaProductos) {
         initComponents();
         this.listaProductos=listaProductos;
+        agregarCabecera();
     }
 
     /**
@@ -61,6 +64,14 @@ public class ListadoPorNombre extends javax.swing.JInternalFrame {
                 jtNombreActionPerformed(evt);
             }
         });
+        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtNombreKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtNombreKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,7 +110,40 @@ public class ListadoPorNombre extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtNombreActionPerformed
 
+    private void jtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyReleased
+        limpiarFilas();
+        String producto = jtNombre.getText();
+        for(Producto p : listaProductos){
+            if(p.getDescripcion().toLowerCase().startsWith(producto.toLowerCase())){
+                modelo.addRow(new Object[]{
+                    p.getCodigo(),
+                    p.getDescripcion(),
+                    p.getPrecio(),
+                    p.getStock()
+                });    
+            }
+        }  
+    }//GEN-LAST:event_jtNombreKeyReleased
 
+    private void jtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyTyped
+        char digito = evt.getKeyChar();
+        if (!Character.isLetter(digito)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtNombreKeyTyped
+    private void agregarCabecera() {
+        modelo.addColumn("Código");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Rubro");
+        modelo.addColumn("Stock");
+        JtablaNombre.setModel(modelo);
+    }
+    private void limpiarFilas(){
+          while (modelo.getRowCount()> 0) {              
+              modelo.removeRow(0);
+          }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JtablaNombre;
     private javax.swing.JLabel jLabel1;
