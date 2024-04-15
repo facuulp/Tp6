@@ -27,7 +27,7 @@ public class tp6almacen extends javax.swing.JFrame {
         Jrubro = new javax.swing.JMenu();
         jmRubro = new javax.swing.JMenuItem();
         jmNombre = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jPrecio = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,13 +77,13 @@ public class tp6almacen extends javax.swing.JFrame {
         });
         Jrubro.add(jmNombre);
 
-        jMenuItem4.setText("Por precio");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jPrecio.setText("Por precio");
+        jPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jPrecioActionPerformed(evt);
             }
         });
-        Jrubro.add(jMenuItem4);
+        Jrubro.add(jPrecio);
 
         jMenuBar1.add(Jrubro);
 
@@ -135,9 +135,14 @@ public class tp6almacen extends javax.swing.JFrame {
         Jescritorio.moveToFront(lpr);
     }//GEN-LAST:event_jmRubroActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    private void jPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPrecioActionPerformed
+        Jescritorio.removeAll();
+        Jescritorio.repaint();
+        ListadoPorPrecio lpr= new ListadoPorPrecio(listaProductos);
+        lpr.setVisible(true);
+        Jescritorio.add(lpr);
+        Jescritorio.moveToFront(lpr);
+    }//GEN-LAST:event_jPrecioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,7 +185,7 @@ public class tp6almacen extends javax.swing.JFrame {
     private javax.swing.JMenu Jrubro;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jPrecio;
     private javax.swing.JMenuItem jmNombre;
     private javax.swing.JMenuItem jmRubro;
     // End of variables declaration//GEN-END:variables
