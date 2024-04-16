@@ -39,7 +39,7 @@ public class Productos extends javax.swing.JInternalFrame {
         jbGuardar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
-        Jbuscar = new javax.swing.JButton();
+        jbBuscar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Gestion de productos:");
@@ -54,6 +54,11 @@ public class Productos extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Stock:");
 
+        Jcodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JcodigoActionPerformed(evt);
+            }
+        });
         Jcodigo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 JcodigoKeyTyped(evt);
@@ -93,6 +98,7 @@ public class Productos extends javax.swing.JInternalFrame {
         });
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.setEnabled(false);
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEliminarActionPerformed(evt);
@@ -106,10 +112,10 @@ public class Productos extends javax.swing.JInternalFrame {
             }
         });
 
-        Jbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoBuscar.png"))); // NOI18N
-        Jbuscar.addActionListener(new java.awt.event.ActionListener() {
+        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoBuscar.png"))); // NOI18N
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JbuscarActionPerformed(evt);
+                jbBuscarActionPerformed(evt);
             }
         });
 
@@ -132,7 +138,7 @@ public class Productos extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Jcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(Jbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(Jdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Jprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(JCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,7 +168,7 @@ public class Productos extends javax.swing.JInternalFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Jcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2))
-                    .addComponent(Jbuscar))
+                    .addComponent(jbBuscar))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -203,11 +209,8 @@ public class Productos extends javax.swing.JInternalFrame {
         int stock = Integer.parseInt(Jstock.getText()); 
         JOptionPane.showMessageDialog(this, "Un producto se guardo");
         listaProductos.add(new Producto(codigo, descripcion, precio, stock, categ));
-        limpiar();
-        
-        
-        
-        
+        jbEliminar.setEnabled(false);
+        jbGuardar.setEnabled(false);     
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void JcodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JcodigoKeyTyped
@@ -232,22 +235,51 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_JstockKeyTyped
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        jbEliminar.setEnabled(true);
+        limpiar();
         jbGuardar.setEnabled(true);
+        
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-//        int resp = JOptionPane.showConfirmDialog(this, "¿Desea eliminar Producto?", "Confirmacion", JOptionPane.YES_NO_OPTION);
-//        if(resp==JOptionPane.YES_OPTION){
-//            listaProductos.remove(Producto);
-//        }
-        limpiar();
+        int resp = JOptionPane.showConfirmDialog(this, "¿Desea eliminar "+ auxiliar.getDescripcion()+ " ?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+        if(resp==JOptionPane.YES_OPTION){
+            listaProductos.remove(auxiliar);
+            limpiar();
+        }
+        
         
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        
+        dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        try {
+            int codigo = Integer.parseInt(Jcodigo.getText());
+            for (Producto prod : listaProductos) {
+                if (prod.getCodigo() == codigo) {
+                    Jdescripcion.setText(prod.getDescripcion());
+                    Jprecio.setText(prod.getPrecio() + "");
+                    Jstock.setText(prod.getStock()+"");
+                    JCategoria.setSelectedItem(prod.getCategorias());
+                    jbEliminar.setEnabled(true);
+                    auxiliar = prod;
+                    return;
+                }
+            }
+            JOptionPane.showMessageDialog(this, "Producto inexistente");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un nro entero");
+            Jcodigo.setText("");
+            Jcodigo.requestFocus();
+            
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void JcodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JcodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JcodigoActionPerformed
     private void limpiar(){
         Jcodigo.setText("");
         Jdescripcion.setText("");
@@ -260,10 +292,10 @@ public class Productos extends javax.swing.JInternalFrame {
         
     }
     
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Categoria> JCategoria;
-    private javax.swing.JButton Jbuscar;
     private javax.swing.JTextField Jcodigo;
     private javax.swing.JTextField Jdescripcion;
     private javax.swing.JTextField Jprecio;
@@ -274,6 +306,7 @@ public class Productos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
