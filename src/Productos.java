@@ -39,7 +39,7 @@ public class Productos extends javax.swing.JInternalFrame {
         jbGuardar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        Jbuscar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Gestion de productos:");
@@ -106,7 +106,12 @@ public class Productos extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen 5 5600G\\Documents\\NetBeansProjects\\tp6\\src\\imagenes\\iconoBuscar.png")); // NOI18N
+        Jbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoBuscar.png"))); // NOI18N
+        Jbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JbuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,7 +132,7 @@ public class Productos extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Jcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Jbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(Jdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Jprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(JCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,7 +162,7 @@ public class Productos extends javax.swing.JInternalFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Jcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2))
-                    .addComponent(jButton5))
+                    .addComponent(Jbuscar))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -180,7 +185,7 @@ public class Productos extends javax.swing.JInternalFrame {
                     .addComponent(jbGuardar)
                     .addComponent(jbEliminar)
                     .addComponent(jbSalir))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -258,11 +263,11 @@ public class Productos extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Categoria> JCategoria;
+    private javax.swing.JButton Jbuscar;
     private javax.swing.JTextField Jcodigo;
     private javax.swing.JTextField Jdescripcion;
     private javax.swing.JTextField Jprecio;
     private javax.swing.JTextField Jstock;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
