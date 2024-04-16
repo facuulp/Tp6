@@ -1,14 +1,23 @@
 
+import com.sun.media.sound.ModelOscillator;
 import entidades.Producto;
 import java.util.TreeSet;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ */
 
-
-
+/**
+ *
+ * @author Ryzen 5 5600G
+ */
 public class ListadoPorPrecio extends javax.swing.JInternalFrame {
        private TreeSet<Producto> listaProductos;
-       private DefaultTableModel modelo=new DefaultTableModel();
+       private DefaultTableModel modelo = new DefaultTableModel();
+
     /**
      * Creates new form ListadoPorPrecio
      */
@@ -16,7 +25,6 @@ public class ListadoPorPrecio extends javax.swing.JInternalFrame {
         initComponents();
         this.listaProductos=listaProductos;
         agregarCabecera();
-        
     }
 
     /**
@@ -57,15 +65,14 @@ public class ListadoPorPrecio extends javax.swing.JInternalFrame {
         ));
         jScrollPane3.setViewportView(jTablaPrecio);
 
-        jtPrecio1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtPrecio1KeyReleased(evt);
-            }
-        });
-
         jtPrecio2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtPrecio2ActionPerformed(evt);
+            }
+        });
+        jtPrecio2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtPrecio2KeyReleased(evt);
             }
         });
 
@@ -111,23 +118,40 @@ public class ListadoPorPrecio extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtPrecio2ActionPerformed
 
-    private void jtPrecio1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPrecio1KeyReleased
-       limpiarFilas();
-       
-    }//GEN-LAST:event_jtPrecio1KeyReleased
-     private void agregarCabecera() {
-        modelo.addColumn("Código");
-        modelo.addColumn("Descripción");
-        modelo.addColumn("Precio");
-        modelo.addColumn("Rubro");
-        modelo.addColumn("Stock");
-        jTablaPrecio.setModel(modelo);
-     }
-     private void limpiarFilas(){
-          while (modelo.getRowCount()> 0) {              
-              modelo.removeRow(0);
-          }
-    }
+    private void jtPrecio2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPrecio2KeyReleased
+        borrarfilas();
+        double precio1;
+        double precio2;
+        
+        try {
+            precio1 = Double.parseDouble(jtPrecio1.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ingrese un número");
+            jtPrecio1.setText("");
+            jtPrecio1.requestFocus();
+            return;
+        }
+        try {
+             precio2 = Double.parseDouble(jtPrecio2.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ingrese un número");
+            jtPrecio2.setText("");
+            jtPrecio2.requestFocus();
+            return;
+        }
+        for (Producto prod : listaProductos) {
+            if (prod.getPrecio() >= precio1 && prod.getPrecio() <= precio2) {
+                modelo.addRow(new Object[]{
+                    prod.getCodigo(),
+                    prod.getDescripcion(),
+                    prod.getPrecio(),
+                    prod.getStock()
+                });
+            }
+        }
+    }//GEN-LAST:event_jtPrecio2KeyReleased
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -137,4 +161,19 @@ public class ListadoPorPrecio extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtPrecio1;
     private javax.swing.JTextField jtPrecio2;
     // End of variables declaration//GEN-END:variables
+
+    private void agregarCabecera() {
+        modelo.addColumn("Código");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Rubro");
+        modelo.addColumn("Stock");
+        jTablaPrecio.setModel(modelo);
+    }
+
+    private void borrarfilas() {
+          while (modelo.getRowCount()> 0) {              
+              modelo.removeRow(0);
+          }
+    }
 }
