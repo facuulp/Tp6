@@ -119,7 +119,6 @@ public class ListadoPorPrecio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtPrecio2ActionPerformed
 
     private void jtPrecio2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPrecio2KeyReleased
-
         borrarfilas();
         double precio1;
         double precio2;
